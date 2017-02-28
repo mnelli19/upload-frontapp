@@ -84,7 +84,7 @@ public class PrepareServlet extends HttpServlet {
 		    		+ ",\nusize: "
 		    		+ request.getParameter("size") 
 		    		+ "\n}";
-		
+		System.out.println("dbdata: "+dbdata);
 		db.save(dbdata);
 		
 //		// A Java type that can be serialized to JSON
