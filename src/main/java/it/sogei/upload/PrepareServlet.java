@@ -1,6 +1,7 @@
 package it.sogei.upload;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -43,7 +44,7 @@ public class PrepareServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		// Create a new CloudantClient instance for account endpoint example.cloudant.com
-		CloudantClient client = ClientBuilder.account("bee17896-df4a-4569-b79b-14ba0d2e21a2-bluemix:be6c67df3b06993c373f85126c21be362bcd165620e93cc010e5ea83b93aac34@bee17896-df4a-4569-b79b-14ba0d2e21a2-bluemix.cloudant.com")
+		CloudantClient client = ClientBuilder.account("bee17896-df4a-4569-b79b-14ba0d2e21a2-bluemix:be6c67df3b06993c373f85126c21be362bcd165620e93cc010e5ea83b93aac34@bee17896-df4a-4569-b79b-14ba0d2e21a2-bluemix")
 		                                     .username("bee17896-df4a-4569-b79b-14ba0d2e21a2-bluemix")
 		                                     .password("be6c67df3b06993c373f85126c21be362bcd165620e93cc010e5ea83b93aac34")
 		                                     .build();
