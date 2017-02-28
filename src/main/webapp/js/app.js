@@ -62,15 +62,15 @@
         var promises = files.map(function(file) {
             return $.ajax({
                 type: "POST",
-                url: "https://upload-flowjs-node.mybluemix.net/prepare",
+                url: "/prepare",
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
-                data: JSON.stringify({
+                data: {
                     user: user,
                     name: file.name,
                     uniqueIdentifier: file.uniqueIdentifier,
                     size: file.chunks.length
-                })
+                }
             })
         })
 
