@@ -73,7 +73,7 @@
                     "user": user,
                     "name": file.name,
                     "uniqueIdentifier": file.uniqueIdentifier,
-                    "size": "1"
+                    "size": file.chunks.length
                 }
             })
         })
