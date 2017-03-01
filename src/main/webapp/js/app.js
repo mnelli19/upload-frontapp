@@ -71,7 +71,12 @@
                     uniqueIdentifier: file.uniqueIdentifier,
                     size: file.chunks.length
                 }
+            
             })
+            console.log("user: "+user);
+            console.log("filename: "+file.name);
+            console.log("uniqueid: "+file.uniqueIdentifier);
+            console.log("chunks: "+file.chunks.length);
         })
 
         $.when.apply($, promises).done(function(response) {
