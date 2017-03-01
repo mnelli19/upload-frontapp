@@ -1,6 +1,7 @@
 package it.sogei.upload;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -101,7 +102,17 @@ public class PrepareServlet extends HttpServlet {
 		System.out.println("db save id: "+responsecloundat.getId());
 		
 		response.setStatus(HttpServletResponse.SC_OK);
-
+		try {
+	        response.setContentType("application/json");
+	        PrintWriter out = response.getWriter();
+	        out.println("{");
+	        out.println("\"id\": \""+responsecloundat.getId()+"\",");
+	        out.println("\"rev\": \""+responsecloundat.getRev()+"\"");
+	        out.println("}");
+	        out.close();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 //		// A Java type that can be serialized to JSON
 //		public class ExampleDocument {
 //		  private String _id = "example_id";
