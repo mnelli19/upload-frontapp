@@ -66,10 +66,10 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 data: {
-                    user: user,
-                    name: file.name,
-                    uniqueIdentifier: file.uniqueIdentifier,
-                    size: file.chunks.length
+                    "user": user,
+                    "name": file.name,
+                    "uniqueIdentifier": file.uniqueIdentifier,
+                    "size": file.chunks.length
                 }
             
             })
