@@ -60,6 +60,10 @@
     r.on('filesSubmitted', function(files, event) {
 
         var promises = files.map(function(file) {
+        	console.log("user: "+user);
+            console.log("filename: "+file.name);
+            console.log("uniqueid: "+file.uniqueIdentifier);
+            console.log("chunks: "+file.chunks.length);
             return $.ajax({
                 type: "POST",
                 url: "/prepare",
