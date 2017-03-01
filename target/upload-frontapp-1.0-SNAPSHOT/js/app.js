@@ -67,13 +67,13 @@
             return $.ajax({
                 type: "POST",
                 url: "/prepare",
-                contentType: 'application/json; charset=utf-8',
+                //contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 data: {
                     "user": user,
                     "name": file.name,
                     "uniqueIdentifier": file.uniqueIdentifier,
-                    "size": file.chunks.length
+                    "size": "1"
                 }
             })
         })
