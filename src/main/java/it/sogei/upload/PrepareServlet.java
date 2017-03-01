@@ -76,14 +76,14 @@ public class PrepareServlet extends HttpServlet {
 		// Get a Database instance to interact with, but don't create it if it doesn't already exist
 		Database db = client.database("nodejs-upload", false);
 		
-		String dbdata = "{'user: '" + request.getParameter("user") 
-		    		+ ",'name: '" 
+		String dbdata = "{\nuser: " + request.getParameter("user") 
+		    		+ ",\nname: " 
 		    		+ request.getParameter("name") 
-		    		+ ",'uniqueIdentifier: '" 
+		    		+ ",\nuniqueIdentifier: " 
 		    		+ request.getParameter("uniqueIdentifier") 
-		    		+ ",'size: '"
+		    		+ ",\nsize: "
 		    		+ request.getParameter("size") 
-		    		+ "}";
+		    		+ "\n}";
 		System.out.println("dbdata: "+dbdata);
 		db.save(dbdata);
 		
