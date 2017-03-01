@@ -1,7 +1,7 @@
 (function() {
     var r = new Flow({
         //target: '/upload',
-    	target:'https://upload-flowjs-node.mybluemix.net/upload',
+    	target:'https://upload-flowjs-java.mybluemix.net/UploadFlowJsJava/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
         query: function(file) {
@@ -78,7 +78,9 @@
             })
         })
 
-        $.when.apply($, promises).done(function(response) {
+        $.when.apply($, promises)
+        	.done(function(response) {
+        		console.log("scrittura db DONE");
                 files.forEach(function(file){
                     var $self = $('.flow-file-' + file.uniqueIdentifier);
                     $self.find('.flow-file-pause').show();
