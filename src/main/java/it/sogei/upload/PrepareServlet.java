@@ -2,7 +2,9 @@ package it.sogei.upload;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -76,15 +78,22 @@ public class PrepareServlet extends HttpServlet {
 		// Get a Database instance to interact with, but don't create it if it doesn't already exist
 		Database db = client.database("nodejs-upload", false);
 		
-		String dbdata = "{\nuser: " + request.getParameter("user") 
-		    		+ ",\nname: " 
-		    		+ request.getParameter("name") 
-		    		+ ",\nuniqueIdentifier: " 
-		    		+ request.getParameter("uniqueIdentifier") 
-		    		+ ",\nsize: "
-		    		+ request.getParameter("size") 
-		    		+ "\n}";
-		System.out.println("dbdata: "+dbdata);
+//		String dbdata = "{\nuser: " + request.getParameter("user") 
+//		    		+ ",\nname: " 
+//		    		+ request.getParameter("name") 
+//		    		+ ",\nuniqueIdentifier: " 
+//		    		+ uniqueIdentifier: 
+//		    		+ ",\nsize: "
+//		    		+ request.getParameter("size") 
+//		    		+ "\n}";
+		
+		
+		Map<String, Object> dbdata = new HashMap<String, Object>();
+		dbdata.put("user", request.getParameter("user") );
+		dbdata.put("uniqueIdentifier", request.getParameter("uniqueIdentifier"));
+		dbdata.put("size", request.getParameter("size"));
+		dbdata.put("name", request.getParameter("name"));
+		System.out.println("dbdata: "+dbdata.toString());
 		db.save(dbdata);
 		
 //		// A Java type that can be serialized to JSON
