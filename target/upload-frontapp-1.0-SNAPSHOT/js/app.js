@@ -1,7 +1,8 @@
 (function() {
     var r = new Flow({
         //target: '/upload',
-    	target:'https://upload-flowjs-java.mybluemix.net/UploadFlowJsJava/upload',
+//    	target:'https://upload-flowjs-java.mybluemix.net/UploadFlowJsJava/upload',
+    	target:'https://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
         query: function(file) {
@@ -77,7 +78,7 @@
                 }
             })
         })
-
+   
         $.when.apply($, promises)
         	.done(function(response) {
         		console.log("scrittura db DONE");
@@ -87,9 +88,10 @@
                     $self.find('.flow-file-resume').show();
                 })
             })
+    
             .fail(function(reject) {
                 var $self = $("#messages").loadTemplate($("#alert-template"));
-                console.log("Qualcosa non e' andato a buon fine ...");
+                console.log("Qualcosa non e' andato a buon fine ..."+promises);
             });
     });
     r.on('complete', function() {

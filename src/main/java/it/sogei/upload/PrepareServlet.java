@@ -101,7 +101,7 @@ public class PrepareServlet extends HttpServlet {
 		System.out.println("db save id: "+responsecloundat.getId());
 		
 		response.setStatus(HttpServletResponse.SC_OK);
-		
+
 //		// A Java type that can be serialized to JSON
 //		public class ExampleDocument {
 //		  private String _id = "example_id";
