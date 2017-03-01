@@ -100,7 +100,7 @@ public class PrepareServlet extends HttpServlet {
 		System.out.println("db save status code: "+responsecloundat.getStatusCode());
 		System.out.println("db save id: "+responsecloundat.getId());
 		
-		response.setStatus(db.save(dbdata).getStatusCode());
+		response.setStatus(HttpServletResponse.SC_OK);
 		
 //		// A Java type that can be serialized to JSON
 //		public class ExampleDocument {
