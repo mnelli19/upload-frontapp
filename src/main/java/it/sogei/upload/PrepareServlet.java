@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cloudant.client.api.ClientBuilder;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
+import com.cloudant.client.api.model.Response;
 
 /**
  * Servlet implementation class PrepareServlet
@@ -94,7 +95,12 @@ public class PrepareServlet extends HttpServlet {
 		dbdata.put("size", request.getParameter("size"));
 		dbdata.put("name", request.getParameter("name"));
 		System.out.println("dbdata: "+dbdata.toString());
-		db.save(dbdata);
+		Response responsecloundat = db.save(dbdata);
+		System.out.println("db save response: "+responsecloundat);
+		System.out.println("db save status code: "+responsecloundat.getStatusCode());
+		System.out.println("db save id: "+responsecloundat.getId());
+		
+		response.setStatus(db.save(dbdata).getStatusCode());
 		
 //		// A Java type that can be serialized to JSON
 //		public class ExampleDocument {
