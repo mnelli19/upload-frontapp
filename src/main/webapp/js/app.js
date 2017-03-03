@@ -10,7 +10,7 @@
 		chunkRetryInterval : 5000,
 		simultaneousUploads : 1,
 		progressCallbacksInterval : 1,
-		withCredentials : true,
+		withCredentials : false,
 		//testChunks : false,
 		method : "octet",
         query: function(file) {
