@@ -5,6 +5,14 @@
 //    	target:'https://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
+        permanentErrors : [ 500, 501 ],
+		maxChunkRetries : 3,
+		chunkRetryInterval : 5000,
+		simultaneousUploads : 1,
+		progressCallbacksInterval : 1,
+		withCredentials : true,
+		//testChunks : false,
+		method : "octet",
         query: function(file) {
             return {
                 user: window.user
