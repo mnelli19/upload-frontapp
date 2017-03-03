@@ -1,8 +1,8 @@
 (function() {
     var r = new Flow({
         //target: '/upload',
-    	target:'https://upload-flowjs-java.mybluemix.net/upload',
-//    	target:'https://upload-flowjs-node.mybluemix.net/upload',
+    	target:'http://upload-flowjs-java.mybluemix.net/upload',
+//    	target:'http://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
         permanentErrors : [ 500, 501 ],
@@ -10,7 +10,6 @@
 		chunkRetryInterval : 5000,
 		simultaneousUploads : 1,
 		progressCallbacksInterval : 1,
-		withCredentials : true,
 		//testChunks : false,
 		method : "octet",
         query: function(file) {
