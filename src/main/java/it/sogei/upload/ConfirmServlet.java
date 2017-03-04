@@ -97,18 +97,18 @@ public class ConfirmServlet extends HttpServlet {
 		Response responsecloundat = db.update(dbdata);
 		System.out.println("db update response: "+responsecloundat);
 		System.out.println("db update status code: "+responsecloundat.getStatusCode());
-		System.out.println("db update id: "+responsecloundat.getId());
+		//System.out.println("db update id: "+responsecloundat.getId());
 		
 		response.setStatus(HttpServletResponse.SC_OK);
-		try {
-	        response.getWriter();
-	        PrintWriter out = response.getWriter();
-	        out.println("Document update successfully");
-	        out.close();
-	    } catch (IOException e) {
-	    	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-	        e.printStackTrace();
-	    }
+//		try {
+//	        response.getWriter();
+//	        PrintWriter out = response.getWriter();
+//	        out.println("Document update successfully");
+//	        out.close();
+//	    } catch (IOException e) {
+//	    	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//	        e.printStackTrace();
+//	    }
 		
 	}
 
