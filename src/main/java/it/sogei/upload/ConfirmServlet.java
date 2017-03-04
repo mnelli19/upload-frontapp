@@ -43,11 +43,6 @@ public class ConfirmServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Not doPost only do Put: ").append(request.getContextPath());
-	}
-	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		// Create a new CloudantClient instance for account endpoint example.cloudant.com
 		CloudantClient client = ClientBuilder.account("bee17896-df4a-4569-b79b-14ba0d2e21a2-bluemix:be6c67df3b06993c373f85126c21be362bcd165620e93cc010e5ea83b93aac34@bee17896-df4a-4569-b79b-14ba0d2e21a2-bluemix")

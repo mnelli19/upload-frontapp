@@ -109,7 +109,7 @@
     	console.log("user: "+user);
         console.log("uniqueid: "+file.uniqueIdentifier);
         $.ajax({
-                type: "PUT",
+                type: "POST",
                 url: "/confirm",
                 //contentType: 'application/json; charset=utf-8',
                 dataType: "json",
