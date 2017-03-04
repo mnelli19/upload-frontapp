@@ -1,7 +1,20 @@
 (function() {
+	if (window.uploadtarget=="java"){
+		var mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
+		var mymethod = "octet";
+	}
+	else if(window.uploadtarget=="node"){
+		var mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
+		var mymethod = "multipart";
+	}
+	else
+		{
+		var mytarget ="/upload";
+		var mymethod = "octet";
+		}
     var r = new Flow({
-        //target: '/upload',
-    	target:'http://upload-flowjs-java.mybluemix.net/upload',
+        target: target,
+    	method: mymethod,
 //    	target:'http://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
@@ -11,7 +24,6 @@
 		simultaneousUploads : 1,
 		progressCallbacksInterval : 1,
 		//testChunks : false,
-		method : "octet",
         query: function(file) {
             return {
                 user: window.user
