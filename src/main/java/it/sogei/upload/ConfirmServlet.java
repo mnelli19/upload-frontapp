@@ -95,13 +95,16 @@ public class ConfirmServlet extends HttpServlet {
 		dbdata.put("uniqueIdentifier", request.getParameter("uniqueIdentifier"));
 		dbdata.put("status", "CONFIRMED");
 		Response responsecloundat = db.update(dbdata);
-		System.out.println("db save response: "+responsecloundat);
-		System.out.println("db save status code: "+responsecloundat.getStatusCode());
-		System.out.println("db save id: "+responsecloundat.getId());
+		System.out.println("db update response: "+responsecloundat);
+		System.out.println("db update status code: "+responsecloundat.getStatusCode());
+		System.out.println("db update id: "+responsecloundat.getId());
 		
 		response.setStatus(HttpServletResponse.SC_OK);
 		try {
-	        response.getWriter().write("Document update successfully");
+	        response.getWriter();
+	        PrintWriter out = response.getWriter();
+	        out.println("Document update successfully");
+	        out.close();
 	    } catch (IOException e) {
 	    	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	        e.printStackTrace();
