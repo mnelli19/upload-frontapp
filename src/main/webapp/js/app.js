@@ -43,7 +43,7 @@
             'file': "flow-file-" + file.uniqueIdentifier,
             'flow-file-name': file.name,
             'flow-file-size': readablizeBytes(file.size),
-            'flow-file-download': '/download/' + file.uniqueIdentifier + "/user/" + user
+            'flow-file-download': 'https://upload-flowjs-node.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user
         }, { append: true });
 
         var $self = $(".flow-file-" + file.uniqueIdentifier);
