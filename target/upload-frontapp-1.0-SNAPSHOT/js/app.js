@@ -123,6 +123,7 @@
                     "_id": _id
                 }
             }).done(function() {
+            	console.log("Update DONE");
                 var $self = $('.flow-file-' + file.uniqueIdentifier);
                 // Reflect that the file upload has completed
                 $self.find('.flow-file-progress').text('(completed)');
