@@ -21,7 +21,7 @@ import com.cloudant.client.api.model.Response;
 /**
  * Servlet implementation class PrepareServlet
  */
-@WebServlet("/prepare")
+@WebServlet("/confirm")
 public class ConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
