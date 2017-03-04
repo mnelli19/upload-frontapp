@@ -110,12 +110,12 @@
         $.ajax({
                 type: "PUT",
                 url: "/confirm",
-                contentType: 'application/json; charset=utf-8',
+                //contentType: 'application/json; charset=utf-8',
                 dataType: "json",
-                data: JSON.stringify({
-                    user: user,
-                    uniqueIdentifier: file.uniqueIdentifier
-                })
+                data: {
+                    "user": user,
+                    "uniqueIdentifier": file.uniqueIdentifier
+                }
             }).done(function() {
                 var $self = $('.flow-file-' + file.uniqueIdentifier);
                 // Reflect that the file upload has completed

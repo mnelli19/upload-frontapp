@@ -22,13 +22,13 @@ import com.cloudant.client.api.model.Response;
  * Servlet implementation class PrepareServlet
  */
 @WebServlet("/prepare")
-public class PrepareServlet extends HttpServlet {
+public class ConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PrepareServlet() {
+    public ConfirmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,10 +41,12 @@ public class PrepareServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Not doPost only do Put: ").append(request.getContextPath());
+	}
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		// Create a new CloudantClient instance for account endpoint example.cloudant.com
@@ -93,54 +95,23 @@ public class PrepareServlet extends HttpServlet {
 		Map<String, Object> dbdata = new HashMap<String, Object>();
 		dbdata.put("user", request.getParameter("user") );
 		dbdata.put("uniqueIdentifier", request.getParameter("uniqueIdentifier"));
-		dbdata.put("size", request.getParameter("size"));
+		dbdata.put("status", "CONFIRMED");
 		dbdata.put("name", request.getParameter("name"));
-		dbdata.put("status", "PREPARING");
 		System.out.println("dbdata: "+dbdata.toString());
-		Response responsecloundat = db.save(dbdata);
+		Response responsecloundat = db.update(dbdata);
+	
 		System.out.println("db save response: "+responsecloundat);
 		System.out.println("db save status code: "+responsecloundat.getStatusCode());
 		System.out.println("db save id: "+responsecloundat.getId());
 		
 		response.setStatus(HttpServletResponse.SC_OK);
 		try {
-	        response.setContentType("application/json");
-	        PrintWriter out = response.getWriter();
-	        out.println("{");
-	        out.println("\"id\": \""+responsecloundat.getId()+"\",");
-	        out.println("\"rev\": \""+responsecloundat.getRev()+"\"");
-	        out.println("}");
-	        out.close();
+	        response.getWriter().write("Document update successfully");
 	    } catch (IOException e) {
+	    	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	        e.printStackTrace();
 	    }
-//		// A Java type that can be serialized to JSON
-//		public class ExampleDocument {
-//		  private String _id = "example_id";
-//		  private String _rev = null;
-//		  private boolean isExample;
-//
-//		  public ExampleDocument(boolean isExample) {
-//		    this.isExample = isExample;
-//		  }
-//
-//		  public String toString() {
-//		    return "{ id: " + _id 
-//		    		+ ",\nrev: " 
-//		    		+ _rev + ",\nisExample: " 
-//		    		+ isExample 
-//		    		+ "\n}";
-//		  }
-//		}
 
-		// Create an ExampleDocument and save it in the database
-//		db.save(new ExampleDocument(true));
-//		System.out.println("You have inserted the document");
-//
-//		// Get an ExampleDocument out of the database and deserialize the JSON into a Java type
-//		ExampleDocument doc = db.find(ExampleDocument.class,"example_id");
-//		System.out.println(doc);
-		
 		
 	}
 
