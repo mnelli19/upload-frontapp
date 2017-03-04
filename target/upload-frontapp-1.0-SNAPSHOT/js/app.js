@@ -106,7 +106,8 @@
         $('.flow-progress .progress-resume-link, .flow-progress .progress-pause-link').hide();
     });
     r.on('fileSuccess', function(file, message) {
-
+    	console.log("user: "+user);
+        console.log("uniqueid: "+file.uniqueIdentifier);
         $.ajax({
                 type: "PUT",
                 url: "/confirm",
