@@ -143,7 +143,7 @@
                 // Reflect that the file upload has completed
                 $self.find('.flow-file-progress').text('(completed)');
                 $self.find('.flow-file-pause, .flow-file-resume').remove();
-                $self.find('.flow-file-download').attr('href', '/download/' + file.uniqueIdentifier + "/user/" + user).show();
+                $self.find('.flow-file-download').attr('href', 'https://upload-flowjs-node.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user).show();
             })
             .fail(function() {
                 console.log("Qualcosa non e' andato a buon fine ...");
