@@ -1,4 +1,6 @@
 (function() {
+	console.log("target: "+window.uploadtarget);
+	
 	if (window.uploadtarget=="java"){
 		var mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
 		var mymethod = "octet";
