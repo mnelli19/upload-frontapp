@@ -103,12 +103,13 @@ public class ConfirmServlet extends HttpServlet {
 		try {
 			System.out.println("Scrivo la response");
 			response.setContentType("application/json");
-	        response.getWriter();
-	        PrintWriter out = response.getWriter();
+			PrintWriter out = response.getWriter();
 	        out.println("{");
-	        out.println("\"msg\": \"Document update successfully\",");
+	        out.println("\"id\": \""+responsecloundat.getId()+"\",");
+	        out.println("\"rev\": \""+responsecloundat.getRev()+"\"");
 	        out.println("}");
 	        out.close();
+	        System.out.println("out " +out);
 	    } catch (IOException e) {
 	    	System.out.println("eccezione: "+e.getMessage());
 	    	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
