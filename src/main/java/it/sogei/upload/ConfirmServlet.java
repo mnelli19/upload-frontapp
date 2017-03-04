@@ -96,7 +96,6 @@ public class ConfirmServlet extends HttpServlet {
 		dbdata.put("user", request.getParameter("user") );
 		dbdata.put("uniqueIdentifier", request.getParameter("uniqueIdentifier"));
 		dbdata.put("status", "CONFIRMED");
-		dbdata.put("name", request.getParameter("name"));
 		System.out.println("dbdata: "+dbdata.toString());
 		Response responsecloundat = db.update(dbdata);
 	
