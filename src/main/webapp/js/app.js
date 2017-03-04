@@ -23,6 +23,9 @@
         $('.flow-error').show();
         return;
     }
+    
+    var _id = "";
+    
     // Show a place for dropping/selecting files
     $('.flow-drop').show();
     r.assignDrop($('.flow-drop')[0]);
@@ -89,6 +92,7 @@
         $.when.apply($, promises)
         	.done(function(response) {
         		console.log("scrittura db DONE");
+        		_id = response.id;
                 files.forEach(function(file){
                     var $self = $('.flow-file-' + file.uniqueIdentifier);
                     $self.find('.flow-file-pause').show();
@@ -115,7 +119,8 @@
                 dataType: "json",
                 data: {
                     "user": user,
-                    "uniqueIdentifier": file.uniqueIdentifier
+                    "uniqueIdentifier": file.uniqueIdentifier,
+                    "_id": _id
                 }
             }).done(function() {
                 var $self = $('.flow-file-' + file.uniqueIdentifier);

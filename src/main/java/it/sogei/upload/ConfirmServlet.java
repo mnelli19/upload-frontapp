@@ -88,12 +88,13 @@ public class ConfirmServlet extends HttpServlet {
 		
 		
 		Map<String, Object> dbdata = new HashMap<String, Object>();
+		String _id = (String)request.getParameter("_id");
+		dbdata = db.find(Map.class, _id);
+		System.out.println("dbdata: "+dbdata.toString());
 		dbdata.put("user", request.getParameter("user") );
 		dbdata.put("uniqueIdentifier", request.getParameter("uniqueIdentifier"));
 		dbdata.put("status", "CONFIRMED");
-		System.out.println("dbdata: "+dbdata.toString());
 		Response responsecloundat = db.update(dbdata);
-	
 		System.out.println("db save response: "+responsecloundat);
 		System.out.println("db save status code: "+responsecloundat.getStatusCode());
 		System.out.println("db save id: "+responsecloundat.getId());
@@ -105,7 +106,6 @@ public class ConfirmServlet extends HttpServlet {
 	    	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	        e.printStackTrace();
 	    }
-
 		
 	}
 
