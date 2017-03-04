@@ -172,6 +172,11 @@
 
     $("#user").blur(function(event) {
         window.user = $("#user").val();
+        if(window.user) {
+          $("#uploadButton").attr("disabled", false);
+        }else{
+          $("#uploadButton").attr("disabled", true);
+        }
     });
 
 })();
