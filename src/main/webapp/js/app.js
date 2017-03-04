@@ -13,7 +13,7 @@
 		var mymethod = "octet";
 		}
     var r = new Flow({
-        target: target,
+        target: mytarget,
     	method: mymethod,
 //    	target:'http://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
