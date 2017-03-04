@@ -34,19 +34,17 @@
 
     $('.flow-progress, .flow-list').hide();
 
-    // Handle file add event
     r.on('fileAdded', function(file) {
-        // Show progress bar
-        $('.flow-progress, .flow-list').show();
-        // Add the file to the list
 
-        var $self = $(".flow-progress").loadTemplate($("#template"), {
-            file: "flow-file flow-file-" + file.uniqueIdentifier
-        });
+        $(".list-group").loadTemplate($("#template"), {
+            'file': "flow-file-" + file.uniqueIdentifier,
+            'flow-file-name': file.name,
+            'flow-file-size': readablizeBytes(file.size),
+            'flow-file-download': '/download/' + file.uniqueIdentifier + "/user/" + user
+        }, { append: true });
 
-        $self.find('.flow-file-name').text(file.name);
-        $self.find('.flow-file-size').text(readablizeBytes(file.size));
-        $self.find('.flow-file-download').attr('href', '/download/' + file.uniqueIdentifier + "/user/" + user).hide();
+        var $self = $(".flow-file-" + file.uniqueIdentifier);
+
         $self.find('.flow-file-pause').on('click', function() {
             file.pause();
             $self.find('.flow-file-pause').hide();
@@ -64,6 +62,8 @@
 
         $self.find('.flow-file-pause').hide();
         $self.find('.flow-file-resume').hide();
+        $self.find('.flow-file-download').hide();
+
     });
     r.on('filesSubmitted', function(files, event) {
 
