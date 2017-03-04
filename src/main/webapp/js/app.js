@@ -1,11 +1,12 @@
 (function() {
-	console.log("target: "+window.uploadtarget);
+	var uploadtarget = document.getElementById('uploadtarget').value;
+	console.log("target: "+uploadtarget);
 	
-	if (window.uploadtarget=="java"){
+	if (uploadtarget=="java"){
 		var mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
 		var mymethod = "octet";
 	}
-	else if(window.uploadtarget=="node"){
+	else if(uploadtarget=="node"){
 		var mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
 		var mymethod = "multipart";
 	}
