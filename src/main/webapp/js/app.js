@@ -1,20 +1,26 @@
 (function() {
+	var mytarget = "";
+	var mymethod = "";
+	
+	document.getElementById("uploadtarget").onclick = function(){
 	var uploadtarget = document.getElementById('uploadtarget').value;
 	console.log("target: "+uploadtarget);
 	
 	if (uploadtarget=="java"){
-		var mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
-		var mymethod = "octet";
+		mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
+		mymethod = "octet";
 	}
 	else if(uploadtarget=="node"){
-		var mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
-		var mymethod = "multipart";
+		mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
+		mymethod = "multipart";
 	}
 	else
 		{
-		var mytarget ="/upload";
-		var mymethod = "octet";
+		mytarget ="/upload";
+		mymethod = "octet";
 		}
+	};
+	
     var r = new Flow({
         target: mytarget,
     	method: mymethod,
