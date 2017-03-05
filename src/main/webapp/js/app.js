@@ -1,28 +1,28 @@
 (function() {
-	var mytarget = "";
-	var mymethod = "octet";
-	$(document).on("change","input[type=radio]",function(){
-		var uploadtarget=$('[name="uploadtarget"]:checked').val();
-		console.log("target: "+mytarget);
-		
-		if (uploadtarget=="java"){
-			mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
-			mymethod = "octet";
-			console.log("target: "+mytarget);
-		}
-		else if(uploadtarget=="node"){
-			mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
-			mymethod = "multipart";
-			console.log("target: "+mytarget);
-		}
-		else
-			{
-			mytarget ="/upload";
-			mymethod = "octet";
-			console.log("target: "+mytarget);
-			}
+//	var mytarget = "";
+//	var mymethod = "octet";
+//	$(document).on("change","input[type=radio]",function(){
+//		var uploadtarget=$('[name="uploadtarget"]:checked').val();
+//		console.log("target: "+mytarget);
+//		
+//		if (uploadtarget=="java"){
+//			mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
+//			mymethod = "octet";
+//			console.log("target: "+mytarget);
+//		}
+//		else if(uploadtarget=="node"){
+//			mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
+//			mymethod = "multipart";
+//			console.log("target: "+mytarget);
+//		}
+//		else
+//			{
+//			mytarget ="/upload";
+//			mymethod = "octet";
+//			console.log("target: "+mytarget);
+//			}
 	    //alert(ac+" "+tier+" "+cap);
-	});
+//	});
 	
 	
 //	var rad = document.uploadform.uploadtarget.on
@@ -45,8 +45,8 @@
 
 	
     var r = new Flow({
-        target: mytarget,
-    	method: mymethod,
+        target: "http://upload-flowjs-java.mybluemix.net/upload",
+    	method: "octet",
 //    	target:'http://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
