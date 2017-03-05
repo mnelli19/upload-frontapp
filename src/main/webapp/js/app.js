@@ -2,24 +2,23 @@
 	var mytarget = "";
 	var mymethod = "";
 	
-	document.getElementById("uploadtarget").onclick = function(){
-	var uploadtarget = document.getElementById('uploadtarget').value;
-	console.log("target: "+uploadtarget);
-	
-	if (uploadtarget=="java"){
+	if (document.getElementById("target-java").checked){
 		mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
 		mymethod = "octet";
+		console.log("target: "+mytarget);
 	}
-	else if(uploadtarget=="node"){
+	else if(document.getElementById("target-node").checked){
 		mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
 		mymethod = "multipart";
+		console.log("target: "+mytarget);
 	}
 	else
 		{
 		mytarget ="/upload";
 		mymethod = "octet";
+		console.log("target: "+mytarget);
 		}
-	};
+
 	
     var r = new Flow({
         target: mytarget,
