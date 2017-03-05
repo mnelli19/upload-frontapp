@@ -47,7 +47,7 @@
     var r = new Flow({
         target: "https://upload-flowjs-java.mybluemix.net/upload",
     	method: "octet",
-//    	target:'http://upload-flowjs-node.mybluemix.net/upload',
+//    	target:'https://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
         permanentErrors : [ 500, 501 ],
