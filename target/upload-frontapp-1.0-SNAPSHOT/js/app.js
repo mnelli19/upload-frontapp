@@ -81,7 +81,7 @@
             return $.ajax({
                 type: "POST",
                 url: "/prepare",
-                contentType: 'application/json; charset=utf-8',
+                //contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 data: {
                 	"user": user,
@@ -116,7 +116,7 @@
         $.ajax({
                 type: "POST",
                 url: "/confirm",
-                contentType: 'application/json; charset=utf-8',
+                //contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 data: {
                 	 "user": user,
