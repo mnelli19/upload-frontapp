@@ -26,6 +26,9 @@
         $('.flow-error').show();
         return;
     }
+    
+    var _id = "";
+    
     r.assignDrop($('.flow-drop')[0]);
     r.assignBrowse($('.flow-browse')[0]);
     r.assignBrowse($('.flow-browse-folder')[0], true);
@@ -33,6 +36,8 @@
         accept: 'image/*'
     });
 
+    $('.flow-progress, .flow-list').hide();
+    
     // Handle file add event
     r.on('fileAdded', function(file) {
 
@@ -40,7 +45,7 @@
             'file': "flow-file-" + file.uniqueIdentifier,
             'flow-file-name': file.name,
             'flow-file-size': readablizeBytes(file.size),
-            'flow-file-download': '/download/' + file.uniqueIdentifier + "/user/" + user
+            'flow-file-download': 'https://upload-flowjs-node.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user
         }, { append: true });
 
         var $self = $(".flow-file-" + file.uniqueIdentifier);
@@ -68,21 +73,28 @@
     r.on('filesSubmitted', function(files, event) {
 
         var promises = files.map(function(file) {
+
+        	console.log("user: "+user);
+        	console.log("filename: "+file.name);
+        	console.log("uniqueid: "+file.uniqueIdentifier);
+        	console.log("chunks: "+file.chunks.length);
             return $.ajax({
                 type: "POST",
                 url: "/prepare",
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
-                data: JSON.stringify({
-                    user: user,
-                    name: file.name,
-                    uniqueIdentifier: file.uniqueIdentifier,
-                    size: file.chunks.length
-                })
+                data: {
+                	"user": user,
+                	"name": file.name,
+                	"uniqueIdentifier": file.uniqueIdentifier,
+                	"size": file.chunks.length
+                }
             })
         })
 
         $.when.apply($, promises).done(function(response) {
+        	console.log("scrittura db DONE");
+        	_id = response.id;
                 files.forEach(function(file){
                     var $self = $('.flow-file-' + file.uniqueIdentifier);
                     $self.find('.flow-file-pause').show();
@@ -102,20 +114,23 @@
 
     r.on('fileSuccess', function(file, message) {
         $.ajax({
-                type: "PUT",
+                type: "POST",
                 url: "/confirm",
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
-                data: JSON.stringify({
-                    user: user,
-                    uniqueIdentifier: file.uniqueIdentifier
-                })
+                data: {
+                	 "user": user,
+                	 "uniqueIdentifier": file.uniqueIdentifier,
+                	 "_id": _id
+                	}
             }).done(function() {
+            	console.log("Update DONE");
                 var $self = $('.flow-file-' + file.uniqueIdentifier);
                 // Reflect that the file upload has completed
                 $self.find('.flow-file-progress').text('(completed)');
                 $self.find('.flow-file-pause, .flow-file-resume').remove();
-                $self.find('.flow-file-download').show();
+                $self.find('.flow-file-download').attr('href', 'https://upload-flowjs-node.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user).show();
+                //$self.find('.flow-file-download').show();
             })
             .fail(function() {
                 console.log("Qualcosa non e' andato a buon fine ...");
