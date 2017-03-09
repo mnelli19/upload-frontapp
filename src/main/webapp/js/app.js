@@ -19,16 +19,13 @@
             }
         }
     });
+     
+    $('.flow-error').hide();
     // Flow.js isn't supported, fall back on a different method
     if (!r.support) {
         $('.flow-error').show();
         return;
     }
-    
-    var _id = "";
-    
-    // Show a place for dropping/selecting files
-    $('.flow-drop').show();
     r.assignDrop($('.flow-drop')[0]);
     r.assignBrowse($('.flow-browse')[0]);
     r.assignBrowse($('.flow-browse-folder')[0], true);
@@ -36,15 +33,14 @@
         accept: 'image/*'
     });
 
-    $('.flow-progress, .flow-list').hide();
-
+    // Handle file add event
     r.on('fileAdded', function(file) {
 
         $(".list-group").loadTemplate($("#template"), {
             'file': "flow-file-" + file.uniqueIdentifier,
             'flow-file-name': file.name,
             'flow-file-size': readablizeBytes(file.size),
-            'flow-file-download': 'https://upload-flowjs-node.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user
+            'flow-file-download': '/download/' + file.uniqueIdentifier + "/user/" + user
         }, { append: true });
 
         var $self = $(".flow-file-" + file.uniqueIdentifier);
@@ -67,96 +63,93 @@
         $self.find('.flow-file-pause').hide();
         $self.find('.flow-file-resume').hide();
         $self.find('.flow-file-download').hide();
-
     });
+
     r.on('filesSubmitted', function(files, event) {
 
         var promises = files.map(function(file) {
-        	console.log("user: "+user);
-            console.log("filename: "+file.name);
-            console.log("uniqueid: "+file.uniqueIdentifier);
-            console.log("chunks: "+file.chunks.length);
             return $.ajax({
                 type: "POST",
                 url: "/prepare",
-                //contentType: 'application/json; charset=utf-8',
+                contentType: 'application/json; charset=utf-8',
                 dataType: "json",
-                data: {
-                    "user": user,
-                    "name": file.name,
-                    "uniqueIdentifier": file.uniqueIdentifier,
-                    "size": file.chunks.length
-                }
+                data: JSON.stringify({
+                    user: user,
+                    name: file.name,
+                    uniqueIdentifier: file.uniqueIdentifier,
+                    size: file.chunks.length
+                })
             })
         })
-   
-        $.when.apply($, promises)
-        	.done(function(response) {
-        		console.log("scrittura db DONE");
-        		_id = response.id;
+
+        $.when.apply($, promises).done(function(response) {
                 files.forEach(function(file){
                     var $self = $('.flow-file-' + file.uniqueIdentifier);
                     $self.find('.flow-file-pause').show();
                     $self.find('.flow-file-resume').show();
                 })
             })
-    
             .fail(function(reject) {
                 var $self = $("#messages").loadTemplate($("#alert-template"));
-                console.log("Qualcosa non e' andato a buon fine ..."+promises);
+                console.log("Qualcosa non e' andato a buon fine ...");
             });
     });
+
     r.on('complete', function() {
         // Hide pause/resume when the upload has completed
         $('.flow-progress .progress-resume-link, .flow-progress .progress-pause-link').hide();
     });
+
     r.on('fileSuccess', function(file, message) {
-    	console.log("user: "+user);
-        console.log("uniqueid: "+file.uniqueIdentifier);
         $.ajax({
-                type: "POST",
+                type: "PUT",
                 url: "/confirm",
-                //contentType: 'application/json; charset=utf-8',
+                contentType: 'application/json; charset=utf-8',
                 dataType: "json",
-                data: {
-                    "user": user,
-                    "uniqueIdentifier": file.uniqueIdentifier,
-                    "_id": _id
-                }
+                data: JSON.stringify({
+                    user: user,
+                    uniqueIdentifier: file.uniqueIdentifier
+                })
             }).done(function() {
-            	console.log("Update DONE");
                 var $self = $('.flow-file-' + file.uniqueIdentifier);
                 // Reflect that the file upload has completed
                 $self.find('.flow-file-progress').text('(completed)');
                 $self.find('.flow-file-pause, .flow-file-resume').remove();
-                $self.find('.flow-file-download').attr('href', 'https://upload-flowjs-node.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user).show();
+                $self.find('.flow-file-download').show();
             })
             .fail(function() {
                 console.log("Qualcosa non e' andato a buon fine ...");
             });
     });
+
     r.on('fileError', function(file, message) {
         // Reflect that the file upload has resulted in error
         $('.flow-file-' + file.uniqueIdentifier + ' .flow-file-progress').html('(file could not be uploaded: ' + message + ')');
     });
+
     r.on('fileProgress', function(file) {
         // Handle progress for both the file and the overall upload
+        var $self = $('.flow-file-' + file.uniqueIdentifier);
+
         $('.flow-file-' + file.uniqueIdentifier + ' .flow-file-progress')
             .html(Math.floor(file.progress() * 100) + '% ' +
                 readablizeBytes(file.averageSpeed) + '/s ' +
                 secondsToStr(file.timeRemaining()) + ' remaining');
-        $('.progress-bar').css({
-            width: Math.floor(r.progress() * 100) + '%'
+        $self.find('.progress-bar').css({
+             width: Math.floor(r.progress() * 100) + '%'
         });
     });
+
     r.on('uploadStart', function() {
         // Show pause, hide resume
         $('.flow-progress .progress-resume-link').hide();
         $('.flow-progress .progress-pause-link').show();
     });
+
     r.on('catchAll', function() {
-        console.log.apply(console, arguments);
+        //console.log.apply(console, arguments);
     });
+
     window.r = {
         pause: function() {
             r.pause();
