@@ -1,61 +1,18 @@
 (function() {
-//	var mytarget = "";
-//	var mymethod = "octet";
-//	$(document).on("change","input[type=radio]",function(){
-//		var uploadtarget=$('[name="uploadtarget"]:checked').val();
-//		console.log("target: "+mytarget);
-//		
-//		if (uploadtarget=="java"){
-//			mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
-//			mymethod = "octet";
-//			console.log("target: "+mytarget);
-//		}
-//		else if(uploadtarget=="node"){
-//			mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
-//			mymethod = "multipart";
-//			console.log("target: "+mytarget);
-//		}
-//		else
-//			{
-//			mytarget ="/upload";
-//			mymethod = "octet";
-//			console.log("target: "+mytarget);
-//			}
-	    //alert(ac+" "+tier+" "+cap);
-//	});
-	
-	
-//	var rad = document.uploadform.uploadtarget.on
-//	if (document.getElementById("target-java").checked){
-//		mytarget ="http://upload-flowjs-java.mybluemix.net/upload";
-//		mymethod = "octet";
-//		console.log("target: "+mytarget);
-//	}
-//	else if(document.getElementById("target-node").checked){
-//		mytarget ="http://upload-flowjs-node.mybluemix.net/upload";
-//		mymethod = "multipart";
-//		console.log("target: "+mytarget);
-//	}
-//	else
-//		{
-//		mytarget ="/upload";
-//		mymethod = "octet";
-//		console.log("target: "+mytarget);
-//		}
+	var mytarget = "https://upload-flowjs-java.mybluemix.net/upload";
+	var mymethod = "octet";
 
-	
     var r = new Flow({
-        target: "https://upload-flowjs-java.mybluemix.net/upload",
-    	method: "octet",
+        target: mytarget,
+    	method: mymethod,
 //    	target:'https://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
         permanentErrors : [ 500, 501 ],
-		maxChunkRetries : 3,
-		chunkRetryInterval : 5000,
-		simultaneousUploads : 1,
-		progressCallbacksInterval : 1,
-		//testChunks : false,
+	maxChunkRetries : 3,
+	chunkRetryInterval : 5000,
+	simultaneousUploads : 1,
+	progressCallbacksInterval : 1,
         query: function(file) {
             return {
                 user: window.user
