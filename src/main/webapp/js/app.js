@@ -28,7 +28,7 @@
 			 	
 			}
 			if(uploadmode==="node"){
-				r.opts.target = "https://upload-flowjs-node.mybluemix.net/upload";
+				r.opts.target = "http://upload-flowjs-node.mybluemix.net/upload";
 			 	r.opts.method = "multipart";
 			}
 			console.log("target: " +r.opts.target+" - method: " +r.opts.method);
