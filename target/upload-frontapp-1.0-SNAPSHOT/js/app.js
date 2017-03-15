@@ -23,15 +23,15 @@
     		var uploadmode = this.value;
 			if (uploadmode==="java"){
 			 	r.opts.target = "https://upload-flowjs-java.mybluemix.net/upload";
-			 	r.opts.target = "octet";	
+			 	r.opts.method = "octet";	
 			 	
 			 	
 			}
 			if(uploadmode==="node"){
 				r.opts.target = "https://upload-flowjs-node.mybluemix.net/upload";
-			 	r.opts.target = "multipart";
+			 	r.opts.method = "multipart";
 			}
-			console.log("target: " +r.target+" - method: " +r.method);
+			console.log("target: " +r.opts.target+" - method: " +r.opts.method);
 			
 		});
     
@@ -90,8 +90,8 @@
 
         var promises = files.map(function(file) {
 
-        	console.log("r.target: "+r.target);
-        	console.log("r.method: "+r.method);
+        	console.log("r.target: "+r.opts.target);
+        	console.log("r.method: "+r.opts.method);
         	console.log("user: "+user);
         	console.log("filename: "+file.name);
         	console.log("uniqueid: "+file.uniqueIdentifier);
