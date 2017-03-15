@@ -22,12 +22,44 @@
 		$("input[name='uploadtarget']").click(function() {
     		var uploadmode = this.value;
 			if (uploadmode==="java"){
-			 	r.target = "https://upload-flowjs-java.mybluemix.net/upload";
-			 	r.method = "octet";	
+				
+				r = new Flow({
+			        target: "https://upload-flowjs-java.mybluemix.net/upload",
+			    	method: "octet",
+//			    	target:'https://upload-flowjs-node.mybluemix.net/upload',
+			        chunkSize: 1024 * 1024,
+			        testChunks: false,
+			        permanentErrors : [ 500, 501 ],
+			        maxChunkRetries : 3,
+			        chunkRetryInterval : 5000,
+			        simultaneousUploads : 1,
+			        progressCallbacksInterval : 1,
+			        query: function(file) {
+			            return {
+			                user: window.user
+			            }
+			        }
+			    })		
 			}
 			if(uploadmode==="node"){
-				r.target = "https://upload-flowjs-node.mybluemix.net/upload";
-			 	r.method = "multipart";
+				
+				r = new Flow({
+			        target: "https://upload-flowjs-node.mybluemix.net/upload",
+			    	method: "multipart",
+//			    	target:'https://upload-flowjs-node.mybluemix.net/upload',
+			        chunkSize: 1024 * 1024,
+			        testChunks: false,
+			        permanentErrors : [ 500, 501 ],
+			        maxChunkRetries : 3,
+			        chunkRetryInterval : 5000,
+			        simultaneousUploads : 1,
+			        progressCallbacksInterval : 1,
+			        query: function(file) {
+			            return {
+			                user: window.user
+			            }
+			        }
+			    })		
 			}
 			console.log("target: " +r.target+" - method: " +r.method);
 			
