@@ -1,7 +1,19 @@
 (function() {
 	var mytarget = "https://upload-flowjs-java.mybluemix.net/upload";
 	var mymethod = "octet";
-
+	
+		$("input[name='uploadtarget']").click(function() {
+    		var uploadmode = this.value;
+			if (uploadmode==="java"){
+			 	mytarget = "https://upload-flowjs-java.mybluemix.net/upload";
+			 	mymethod = "octet";	
+			}
+			if(uploadmode==="node"){
+				mytarget = "https://upload-flowjs-node.mybluemix.net/upload";
+			 	mymethod = "multipart";
+			}
+			console.log("target: " +mytarget+" - method: " +mymethod);
+		});
     var r = new Flow({
         target: mytarget,
     	method: mymethod,
