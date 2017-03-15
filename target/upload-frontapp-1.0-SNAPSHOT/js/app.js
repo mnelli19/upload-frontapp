@@ -1,7 +1,7 @@
 (function() {
-	var mytarget = "https://upload-flowjs-java.mybluemix.net/upload";
-	var mymethod = "octet";
-	
+	//var mytarget = "https://upload-flowjs-java.mybluemix.net/upload";
+	//var mymethod = "octet";
+	var r;
 		$("input[name='uploadtarget']").click(function() {
     		var uploadmode = this.value;
 			if (uploadmode==="java"){
@@ -13,24 +13,26 @@
 			 	mymethod = "multipart";
 			}
 			console.log("target: " +mytarget+" - method: " +mymethod);
+			
+			r = new Flow({
+		        target: mytarget,
+		    	method: mymethod,
+//		    	target:'https://upload-flowjs-node.mybluemix.net/upload',
+		        chunkSize: 1024 * 1024,
+		        testChunks: false,
+		        permanentErrors : [ 500, 501 ],
+		        maxChunkRetries : 3,
+		        chunkRetryInterval : 5000,
+		        simultaneousUploads : 1,
+		        progressCallbacksInterval : 1,
+		        query: function(file) {
+		            return {
+		                user: window.user
+		            }
+		        }
+		    });
 		});
-    var r = new Flow({
-        target: mytarget,
-    	method: mymethod,
-//    	target:'https://upload-flowjs-node.mybluemix.net/upload',
-        chunkSize: 1024 * 1024,
-        testChunks: false,
-        permanentErrors : [ 500, 501 ],
-	maxChunkRetries : 3,
-	chunkRetryInterval : 5000,
-	simultaneousUploads : 1,
-	progressCallbacksInterval : 1,
-        query: function(file) {
-            return {
-                user: window.user
-            }
-        }
-    });
+    
      
     $('.flow-error').hide();
     // Flow.js isn't supported, fall back on a different method
@@ -85,7 +87,10 @@
     r.on('filesSubmitted', function(files, event) {
 
         var promises = files.map(function(file) {
-
+        	console.log("target: "+mytarget);
+        	console.log("method: "+mymethod);
+        	console.log("r.target: "+r.target);
+        	console.log("r.method: "+r.method);
         	console.log("user: "+user);
         	console.log("filename: "+file.name);
         	console.log("uniqueid: "+file.uniqueIdentifier);
