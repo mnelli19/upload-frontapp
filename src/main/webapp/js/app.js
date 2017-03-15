@@ -87,8 +87,7 @@
     r.on('filesSubmitted', function(files, event) {
 
         var promises = files.map(function(file) {
-        	console.log("target: "+mytarget);
-        	console.log("method: "+mymethod);
+
         	console.log("r.target: "+r.target);
         	console.log("r.method: "+r.method);
         	console.log("user: "+user);
