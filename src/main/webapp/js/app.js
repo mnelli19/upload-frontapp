@@ -2,8 +2,8 @@
 	//var mytarget = "https://upload-flowjs-java.mybluemix.net/upload";
 	//var mymethod = "octet";
 	var r = new Flow({
-        target: "https://upload-flowjs-java.mybluemix.net/upload",
-    	method: "octet",
+        target: "",
+    	method: "",
 //    	target:'https://upload-flowjs-node.mybluemix.net/upload',
         chunkSize: 1024 * 1024,
         testChunks: false,
@@ -19,21 +19,21 @@
         }
     });
 	
-//		$("input[name='uploadtarget']").click(function() {
-//    		var uploadmode = this.value;
-//			if (uploadmode==="java"){
-//			 	r.target = "https://upload-flowjs-java.mybluemix.net/upload";
-//			 	r.method = "octet";	
-//			 	
-//			 	
-//			}
-//			if(uploadmode==="node"){
-//				r.target = "https://upload-flowjs-node.mybluemix.net/upload";
-//			 	r.method = "multipart";
-//			}
-//			console.log("target: " +r.target+" - method: " +r.method);
-//			
-//		});
+		$("input[name='uploadtarget']").click(function() {
+    		var uploadmode = this.value;
+			if (uploadmode==="java"){
+			 	r.opts.target = "https://upload-flowjs-java.mybluemix.net/upload";
+			 	r.opts.target = "octet";	
+			 	
+			 	
+			}
+			if(uploadmode==="node"){
+				r.opts.target = "https://upload-flowjs-node.mybluemix.net/upload";
+			 	r.opts.target = "multipart";
+			}
+			console.log("target: " +r.target+" - method: " +r.method);
+			
+		});
     
      
     $('.flow-error').hide();
