@@ -1,36 +1,36 @@
 (function() {
 	//var mytarget = "https://upload-flowjs-java.mybluemix.net/upload";
 	//var mymethod = "octet";
-	var r;
+	var r = new Flow({
+        target: "",
+    	method: "",
+//    	target:'https://upload-flowjs-node.mybluemix.net/upload',
+        chunkSize: 1024 * 1024,
+        testChunks: false,
+        permanentErrors : [ 500, 501 ],
+        maxChunkRetries : 3,
+        chunkRetryInterval : 5000,
+        simultaneousUploads : 1,
+        progressCallbacksInterval : 1,
+        query: function(file) {
+            return {
+                user: window.user
+            }
+        }
+    });
+	
 		$("input[name='uploadtarget']").click(function() {
     		var uploadmode = this.value;
 			if (uploadmode==="java"){
-			 	mytarget = "https://upload-flowjs-java.mybluemix.net/upload";
-			 	mymethod = "octet";	
+			 	r.target = "https://upload-flowjs-java.mybluemix.net/upload";
+			 	r.method = "octet";	
 			}
 			if(uploadmode==="node"){
-				mytarget = "https://upload-flowjs-node.mybluemix.net/upload";
-			 	mymethod = "multipart";
+				r.target = "https://upload-flowjs-node.mybluemix.net/upload";
+			 	r.method = "multipart";
 			}
-			console.log("target: " +mytarget+" - method: " +mymethod);
+			console.log("target: " +r.target+" - method: " +r.method);
 			
-			r = new Flow({
-		        target: mytarget,
-		    	method: mymethod,
-//		    	target:'https://upload-flowjs-node.mybluemix.net/upload',
-		        chunkSize: 1024 * 1024,
-		        testChunks: false,
-		        permanentErrors : [ 500, 501 ],
-		        maxChunkRetries : 3,
-		        chunkRetryInterval : 5000,
-		        simultaneousUploads : 1,
-		        progressCallbacksInterval : 1,
-		        query: function(file) {
-		            return {
-		                user: window.user
-		            }
-		        }
-		    });
 		});
     
      
