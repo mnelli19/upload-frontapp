@@ -1,5 +1,6 @@
 applications:
-- memory: 128M
+- path: target/upload-frontapp.war
+  memory: 128M
   instances: 1
   name: upload-frontapp
   buildpack: java_buildpack
