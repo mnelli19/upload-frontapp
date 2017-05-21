@@ -22,13 +22,13 @@
 		$("input[name='uploadtarget']").click(function() {
     		var uploadmode = this.value;
 			if (uploadmode==="java"){
-			 	r.opts.target = "https://upload-flowjs-java.mybluemix.net/upload";
+			 	r.opts.target = "https://upload-flowjs-java.eu-gb.mybluemix.net/upload";
 			 	r.opts.method = "octet";	
 			 	
 			 	
 			}
 			if(uploadmode==="node"){
-				r.opts.target = "https://upload-flowjs-node.mybluemix.net/upload";
+				r.opts.target = "https://upload-flowjs-node.eu-gb.mybluemix.net/upload";
 			 	r.opts.method = "multipart";
 			}
 			console.log("target: " +r.opts.target+" - method: " +r.opts.method);
@@ -61,7 +61,7 @@
             'file': "flow-file-" + file.uniqueIdentifier,
             'flow-file-name': file.name,
             'flow-file-size': readablizeBytes(file.size),
-            'flow-file-download': 'https://upload-flowjs-node.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user
+            'flow-file-download': 'https://upload-flowjs-node.eu-gb.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user
         }, { append: true });
 
         var $self = $(".flow-file-" + file.uniqueIdentifier);
@@ -147,7 +147,7 @@
                 // Reflect that the file upload has completed
                 $self.find('.flow-file-progress').text('(completed)');
                 $self.find('.flow-file-pause, .flow-file-resume').remove();
-                $self.find('.flow-file-download').attr('href', 'https://upload-flowjs-node.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user).show();
+                $self.find('.flow-file-download').attr('href', 'https://upload-flowjs-node.eu-gb.mybluemix.net/download/' + file.uniqueIdentifier + "/user/" + user).show();
                 //$self.find('.flow-file-download').show();
             })
             .fail(function() {
